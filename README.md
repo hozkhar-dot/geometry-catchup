@@ -22,7 +22,7 @@ Pushing to `main` builds and deploys to GitHub Pages via `.github/workflows/depl
 
 1. Scaffold: done (dashboard shell, routing, progress module, deploy pipeline)
 2. Quiz player: done
-3. Blocks 1-2 content: pending
+3. Blocks 1-2 content: done (awaiting owner QC)
 4. Blocks 3-5 content: pending
 5. Blocks 6-7 content + review page: pending
 6. Block 8, dashboard polish, mobile pass, final deploy: pending

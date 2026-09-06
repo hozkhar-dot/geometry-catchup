@@ -32,15 +32,6 @@ export function settingsPage(root) {
       <button class="btn btn-danger" id="reset-btn" type="button">Erase all progress</button>
     </section>
 
-    <section class="card" aria-labelledby="demo-h">
-      <h2 id="demo-h">Quiz player demo</h2>
-      <p class="small muted">Five throwaway questions for trying the player. Nothing here is saved to your progress.</p>
-      <div class="btn-row">
-        <a class="btn btn-secondary" href="#/quiz/demo/practice">Demo practice</a>
-        <a class="btn btn-secondary" href="#/quiz/demo/checkpoint">Demo checkpoint (timed)</a>
-      </div>
-    </section>
-
     <section class="card" aria-labelledby="info-h">
       <h2 id="info-h">Stored right now</h2>
       <ul class="small">
