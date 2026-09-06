@@ -1,6 +1,6 @@
 // Structural validation of all registered content. Run: node scripts-validate.mjs
 import { getBlockContent } from './src/content/index.js';
-const blocks = { 1: getBlockContent(1), 2: getBlockContent(2) };
+const blocks = Object.fromEntries([1, 2, 3, 4, 5].map((n) => [n, getBlockContent(n)]));
 const ids = new Set(); let problems = 0;
 const say = (m) => { problems++; console.log('PROBLEM:', m); };
 for (const [bid, c] of Object.entries(blocks)) {

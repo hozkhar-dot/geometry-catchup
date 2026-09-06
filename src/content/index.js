@@ -10,11 +10,17 @@
 import { DUMMY_QUESTIONS, DUMMY_BLOCK } from './dummy.js';
 import block1 from './block1.js';
 import block2 from './block2.js';
+import block3 from './block3.js';
+import block4 from './block4.js';
+import block5 from './block5.js';
 
 const REGISTRY = {
   1: normalize(block1),
   2: normalize(block2),
-  // 3..8 added in later sessions
+  3: normalize(block3),
+  4: normalize(block4),
+  5: normalize(block5),
+  // 6..8 added in later sessions
 };
 
 const EMPTY = { lesson: null, practice: [], checkpoint: [] };

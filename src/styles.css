@@ -213,3 +213,4 @@ input[type="file"] { font-size: 1rem; }
   .quiz-timer { font-size: 1.1rem; }
   .q-actions .btn { flex: 1; text-align: center; }
 }
+.table-wrap { overflow-x: auto; margin: 0.5rem 0 0.75rem; }
