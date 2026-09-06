@@ -143,3 +143,73 @@ code { background: var(--accent-soft); padding: 0.1rem 0.3rem; border-radius: 4p
 input[type="file"] { font-size: 1rem; }
 
 .katex-display { margin: 0.5rem 0; overflow-x: auto; overflow-y: hidden; }
+
+/* ---------- Quiz player ---------- */
+.quiz-bar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+.quiz-progress { flex: 1; min-width: 180px; }
+.bar { height: 8px; background: var(--border); border-radius: 4px; margin-top: 0.3rem; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--accent); transition: width 0.2s; }
+.quiz-timer-wrap { display: flex; align-items: center; gap: 0.6rem; }
+.quiz-timer { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.3rem; min-width: 3.5rem; text-align: right; }
+.quiz-timer.hidden { display: none; }
+.timer-low { color: var(--accent); }
+.btn-link { background: none; border: 0; color: var(--accent); text-decoration: underline; cursor: pointer; font-size: 0.95rem; padding: 0.3rem; }
+
+.question .q-meta { margin: 0 0 0.4rem; text-transform: capitalize; }
+.q-diagram { margin: 0.5rem 0 0.75rem; }
+.q-diagram svg { max-width: 100%; height: auto; }
+.q-diagram-small svg { max-width: 160px; }
+.q-prompt { font-size: 1.1rem; margin-bottom: 0.9rem; }
+
+.choices { display: grid; gap: 0.5rem; margin-bottom: 1rem; }
+.choice {
+  display: flex; align-items: center; gap: 0.75rem; width: 100%; text-align: left;
+  background: var(--bg); color: var(--text); border: 2px solid var(--border); border-radius: 8px;
+  padding: 0.7rem 0.9rem; font-size: 1.05rem; cursor: pointer; min-height: 48px;
+}
+.choice:hover:not(:disabled) { border-color: var(--accent); }
+.choice:disabled { cursor: default; }
+.choice-letter {
+  flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--border);
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem;
+}
+.choice-selected { border-color: var(--accent); background: var(--accent-soft); }
+.choice-selected .choice-letter { background: var(--accent); border-color: var(--accent); color: #fff; }
+.choice-correct { border-color: var(--ok); background: var(--ok-soft); }
+.choice-correct .choice-letter { background: var(--ok); border-color: var(--ok); color: #fff; }
+.choice-wrong { border-color: var(--accent); background: var(--accent-soft); opacity: 0.9; }
+
+.numeric { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; max-width: 320px; }
+.numeric input {
+  font-size: 1.15rem; padding: 0.6rem 0.8rem; border: 2px solid var(--border); border-radius: 8px;
+  background: var(--surface); color: var(--text); min-height: 48px;
+}
+.numeric input:focus { border-color: var(--accent); }
+
+.q-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.q-feedback { margin-top: 0.5rem; }
+.verdict { font-weight: 700; margin: 0.5rem 0; }
+.verdict-ok { color: var(--ok); }
+.verdict-bad { color: var(--accent); }
+.solution { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.9rem; margin-top: 0.5rem; }
+.solution summary { cursor: pointer; font-weight: 600; }
+.solution p { margin: 0.5rem 0; }
+.kbd-hint { margin-top: 0.5rem; }
+
+.card-ok { border-left: 5px solid var(--ok); }
+.topic-table { width: 100%; border-collapse: collapse; }
+.topic-table th, .topic-table td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--border); }
+.summary-list { padding-left: 0; list-style: none; }
+.summary-list li { border-left: 4px solid var(--border); padding: 0.5rem 0.9rem; margin-bottom: 0.8rem; }
+.summary-list .sum-ok { border-color: var(--ok); }
+.summary-list .sum-bad { border-color: var(--accent); }
+.sum-head { display: flex; gap: 0.5rem; align-items: center; }
+.sum-mark { font-weight: 700; }
+.sum-ok .sum-mark { color: var(--ok); }
+.sum-bad .sum-mark { color: var(--accent); }
+.review-list { padding-left: 0; list-style: none; }
+.review-list li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+@media (max-width: 680px) {
+  .quiz-timer { font-size: 1.1rem; }
+  .q-actions .btn { flex: 1; text-align: center; }
+}

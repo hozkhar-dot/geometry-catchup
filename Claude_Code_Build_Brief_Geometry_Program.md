@@ -36,6 +36,8 @@ Content comes from `Geometry_Catchup_Plan.md`: 8 blocks, their topics, and their
 
 Block 8 is different: no new lesson; two 20-question timed mixed sets drawing on all previous blocks, plus the outbound links to official practice.
 
+**Decision (session 2, 2026-09-06): lessons are self-contained.** Each lesson must teach the block completely on its own: definitions, the reasoning behind each formula, and enough worked examples that a student can go straight from the lesson to the practice set without watching a video. The Khan Academy links stay on each block page as optional backup, not as a prerequisite. Word counts may exceed the 600-900 guideline when needed to be complete; clarity over brevity. Official SAT/ACT questions remain external in Block 8 (never copied).
+
 ## 5. Build order (one Claude Code session each, roughly)
 
 1. Scaffold: project structure, dashboard shell, routing between pages, localStorage progress module with export/import, deploy pipeline working end to end with placeholder content. Deploy on day one, even empty.

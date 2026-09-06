@@ -21,7 +21,7 @@ Pushing to `main` builds and deploys to GitHub Pages via `.github/workflows/depl
 ## Build order status
 
 1. Scaffold: done (dashboard shell, routing, progress module, deploy pipeline)
-2. Quiz player: pending
+2. Quiz player: done
 3. Blocks 1-2 content: pending
 4. Blocks 3-5 content: pending
 5. Blocks 6-7 content + review page: pending
