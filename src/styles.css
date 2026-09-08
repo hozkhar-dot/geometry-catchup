@@ -214,3 +214,14 @@ input[type="file"] { font-size: 1rem; }
   .q-actions .btn { flex: 1; text-align: center; }
 }
 .table-wrap { overflow-x: auto; margin: 0.5rem 0 0.75rem; }
+
+/* Review page (session 5) */
+.review-head { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.review-head h2 { margin: 0; }
+.btn-small { padding: 0.35rem 0.8rem; font-size: 0.9rem; }
+.review-item { padding: 0.75rem 0; }
+.review-item .q-prompt { margin: 0.35rem 0; }
+.review-progress { color: var(--muted); }
+.review-halfway { color: var(--ok); font-weight: 600; }
+.pill-flag { background: var(--accent-soft); border-color: var(--accent); }
+.row-flag td { background: var(--accent-soft); }

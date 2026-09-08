@@ -13,6 +13,7 @@ load(); // initialise progress store
 route('/', dashboardPage);
 route('/block/:id', blockPage);
 route('/quiz/:blockId/:mode', quizPage);
+route('/quiz/:blockId/:mode/:topic', quizPage); // review retry filtered to one topic
 route('/review', reviewPage);
 route('/settings', settingsPage);
 

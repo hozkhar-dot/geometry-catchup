@@ -28,6 +28,14 @@ Then open Claude Code in that folder. The project state and next-session prompt 
 knowledge base at `memory/projects/geometry-catchup.md`; Claude reads it at the start of each session.
 Push to `main` from any machine deploys the site. Pull before starting a session on a second machine.
 
+## Content checks
+
+```
+node scripts-validate.mjs
+```
+
+Structural checks on every registered block: ids, choices, answer indexes, difficulty ramp, KaTeX parses, rounded answers carry a `tolerance`.
+
 ## Deploy
 
 Pushing to `main` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`.
@@ -38,5 +46,5 @@ Pushing to `main` builds and deploys to GitHub Pages via `.github/workflows/depl
 2. Quiz player: done
 3. Blocks 1-2 content: done (independently re-solved, 50/50 keys verified)
 4. Blocks 3-5 content: done (awaiting independent re-solve QC)
-5. Blocks 6-7 content + review page: pending
+5. Blocks 6-7 content + review page: done (Block 6 coordinate geometry, Block 7 solid geometry, no checkpoints per the plan; Review page gained a topic health table, per-topic retry, miss history)
 6. Block 8, dashboard polish, mobile pass, final deploy: pending

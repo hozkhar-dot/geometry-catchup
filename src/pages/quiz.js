@@ -18,8 +18,9 @@ window.addEventListener('hashchange', () => {
  *   #/quiz/:blockId/practice    practice set for a block (or 'demo')
  *   #/quiz/:blockId/checkpoint  timed checkpoint for a block (or 'demo')
  *   #/quiz/review/practice      retry every missed question
+ *   #/quiz/review/practice/:topic  retry missed questions in one topic
  */
-export function quizPage(root, { blockId, mode }) {
+export function quizPage(root, { blockId, mode, topic }) {
   active?.destroy();
   active = null;
 
@@ -31,9 +32,10 @@ export function quizPage(root, { blockId, mode }) {
   let title = '';
   let backHref = '#/';
   if (isReview) {
-    const missed = Object.keys(load().missed);
+    const missedMap = load().missed;
+    const missed = Object.keys(missedMap).filter((qid) => !topic || missedMap[qid].topic === topic);
     questions = missed.map(getQuestion).filter(Boolean);
-    title = 'Retry missed questions';
+    title = topic ? `Retry: ${topic}` : 'Retry missed questions';
     backHref = '#/review';
     mode = 'practice';
   } else if (block) {
