@@ -14,6 +14,20 @@ npm install
 npm run dev
 ```
 
+## Working from another computer
+
+Everything lives in the GitHub repo `hozkhar-dot/geometry-catchup`; nothing is local-only.
+On any Mac with Node 22 and an SSH key registered with GitHub:
+
+```
+git clone git@github.com:hozkhar-dot/geometry-catchup.git ~/Documents/geometry-catchup
+cd ~/Documents/geometry-catchup && npm install
+```
+
+Then open Claude Code in that folder. The project state and next-session prompt live in the
+knowledge base at `memory/projects/geometry-catchup.md`; Claude reads it at the start of each session.
+Push to `main` from any machine deploys the site. Pull before starting a session on a second machine.
+
 ## Deploy
 
 Pushing to `main` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`.
@@ -22,7 +36,7 @@ Pushing to `main` builds and deploys to GitHub Pages via `.github/workflows/depl
 
 1. Scaffold: done (dashboard shell, routing, progress module, deploy pipeline)
 2. Quiz player: done
-3. Blocks 1-2 content: done (awaiting owner QC)
-4. Blocks 3-5 content: pending
+3. Blocks 1-2 content: done (independently re-solved, 50/50 keys verified)
+4. Blocks 3-5 content: done (awaiting independent re-solve QC)
 5. Blocks 6-7 content + review page: pending
 6. Block 8, dashboard polish, mobile pass, final deploy: pending
