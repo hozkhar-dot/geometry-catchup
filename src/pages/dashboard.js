@@ -14,6 +14,8 @@ export function dashboardPage(root) {
   const week = planWeek();
   const todo = nextTask(state, week);
   const streak = sessionsThisWeek();
+  const reviewCount = Object.keys(state.missed).length;
+  const totals = overallTotals(state);
 
   root.innerHTML = `
     <h1>Dashboard</h1>
@@ -24,6 +26,7 @@ export function dashboardPage(root) {
         <h2 id="todo-h">What to do today</h2>
         <p class="lead">${todo.text}</p>
         ${todo.href ? `<a class="btn" href="${todo.href}">${todo.cta}</a>` : ''}
+        ${reviewCount && todo.href !== '#/review' ? `<p class="small muted todo-review"><a href="#/review">${reviewCount} missed question${reviewCount === 1 ? '' : 's'} waiting in Review</a></p>` : ''}
       </div>
 
       <div class="card" aria-labelledby="streak-h">
@@ -50,6 +53,7 @@ export function dashboardPage(root) {
 
     <section aria-labelledby="blocks-h">
       <h2 id="blocks-h">Blocks</h2>
+      <p class="muted small">${totals.done} of ${BLOCKS.length} blocks done · ${totals.answered} of ${totals.total} practice questions answered${totals.attempts ? ` · ${totals.accuracy}% correct overall` : ''}</p>
       <div class="block-grid">
         ${BLOCKS.map((b) => blockCard(b, state)).join('')}
       </div>
@@ -98,6 +102,10 @@ function timelineCell(w, currentWeek, state) {
 function blockCard(b, state) {
   const p = state.blocks[b.id];
   const status = p?.status || 'not-started';
+  const total = getBlockContent(b.id).practice.length;
+  const cp = state.checkpoints[b.id];
+  const answered = Math.min(p?.practiceAnswered || 0, total);
+  const pct = total ? Math.round((answered / total) * 100) : 0;
   const weeks = b.weeks.length === 1 ? `Week ${b.weeks[0]}` : `Weeks ${b.weeks[0]}-${b.weeks[b.weeks.length - 1]}`;
   return `<a class="card block-card status-${status}" href="#/block/${b.id}">
     <div class="block-card-head">
@@ -106,6 +114,8 @@ function blockCard(b, state) {
     </div>
     <h3>${b.title}</h3>
     <p class="muted small">${weeks}${b.checkpoint ? ' · ' + b.checkpoint.label : ''}</p>
+    ${total ? `<div class="bar bar-thin" aria-hidden="true"><div class="bar-fill" style="width:${pct}%"></div></div>
+    <p class="small muted card-progress">Practice ${answered}/${total}${cp ? ` · ${b.checkpoint.label} ${cp.score}/${cp.total}` : ''}</p>` : `<p class="small muted card-progress">Content coming soon</p>`}
   </a>`;
 }
 
@@ -169,4 +179,19 @@ function nextTask(state, week) {
     return { text: `${prefix}Three sessions logged this week. If you have time, retry missed questions in Review.`, href: '#/review', cta: 'Open Review' };
   }
   return { text: `${prefix}Continue Block ${pending.id}: ${pending.title}.`, href: `#/block/${pending.id}`, cta: `Open Block ${pending.id}` };
+}
+
+/** Overall totals for the Blocks heading. A block is done when its checkpoint is passed, or, without one, when its practice set is fully answered. */
+function overallTotals(state) {
+  let answered = 0, total = 0, done = 0;
+  for (const b of BLOCKS) {
+    const n = getBlockContent(b.id).practice.length;
+    const p = state.blocks[b.id];
+    total += n;
+    answered += Math.min(p?.practiceAnswered || 0, n);
+    if (b.checkpoint ? p?.status === 'passed' : n > 0 && (p?.practiceAnswered || 0) >= n) done += 1;
+  }
+  const attempts = state.attempts.length;
+  const correct = state.attempts.filter((a) => a.correct).length;
+  return { answered, total, done, attempts, accuracy: attempts ? Math.round((correct / attempts) * 100) : 0 };
 }

@@ -49,7 +49,7 @@ export function mountQuiz(container, opts) {
   function tick() {
     const el = container.querySelector('#quiz-timer');
     if (!el) return;
-    if (isCheckpoint) {
+    if (opts.timeLimitSec) {
       const left = timeLeftSec();
       el.textContent = fmt(left);
       el.classList.toggle('timer-low', left <= 60);
@@ -83,7 +83,7 @@ export function mountQuiz(container, opts) {
             <div class="bar"><div class="bar-fill" style="width:${((state.i) / n) * 100}%"></div></div>
           </div>
           <div class="quiz-timer-wrap">
-            ${isCheckpoint
+            ${opts.timeLimitSec
               ? `<span class="quiz-timer" id="quiz-timer" role="timer" aria-live="off">${fmt(timeLeftSec())}</span>`
               : `<button type="button" class="btn-link" id="stopwatch-toggle" aria-pressed="${state.stopwatchOn}">${state.stopwatchOn ? 'Hide stopwatch' : 'Show stopwatch'}</button>
                  <span class="quiz-timer ${state.stopwatchOn ? '' : 'hidden'}" id="quiz-timer" role="timer" aria-live="off"></span>`}
@@ -247,14 +247,14 @@ export function mountQuiz(container, opts) {
 
         <section class="card">
           <h3>By topic</h3>
-          <table class="topic-table">
+          <div class="table-wrap"><table class="topic-table">
             <thead><tr><th scope="col">Topic</th><th scope="col">Correct</th><th scope="col">Avg time</th></tr></thead>
             <tbody>
               ${Object.entries(s.byTopic).map(([t, v]) => `<tr>
                 <td>${t}</td><td>${v.correct} / ${v.total}</td><td>${fmt(Math.round(v.avgMs / 1000))}${v.avgMs > SLOW_MS ? ' <span class="pill pill-in-progress">slow</span>' : ''}</td>
               </tr>`).join('')}
             </tbody>
-          </table>
+          </table></div>
           ${slow.length ? `<p class="small muted">${slow.length} question${slow.length === 1 ? '' : 's'} took over ${SLOW_MS / 1000 / 60} minutes. Slow topics are worth a second pass even when correct.</p>` : ''}
         </section>
 

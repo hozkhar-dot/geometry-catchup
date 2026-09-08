@@ -199,6 +199,7 @@ input[type="file"] { font-size: 1rem; }
 .card-ok { border-left: 5px solid var(--ok); }
 .topic-table { width: 100%; border-collapse: collapse; }
 .topic-table th, .topic-table td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--border); }
+.topic-table th { white-space: nowrap; }
 .summary-list { padding-left: 0; list-style: none; }
 .summary-list li { border-left: 4px solid var(--border); padding: 0.5rem 0.9rem; margin-bottom: 0.8rem; }
 .summary-list .sum-ok { border-color: var(--ok); }
@@ -225,3 +226,10 @@ input[type="file"] { font-size: 1rem; }
 .review-halfway { color: var(--ok); font-weight: 600; }
 .pill-flag { background: var(--accent-soft); border-color: var(--accent); }
 .row-flag td { background: var(--accent-soft); }
+
+/* Dashboard polish (session 6) */
+.bar-thin { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 0.4rem; }
+.card-progress { margin: 0.35rem 0 0; }
+.todo-review { margin-top: 0.6rem; }
+.block-card { display: flex; flex-direction: column; }
+.block-card .bar-thin { margin-top: auto; }

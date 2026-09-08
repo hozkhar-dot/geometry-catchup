@@ -31,6 +31,7 @@ export function quizPage(root, { blockId, mode, topic }) {
   let questions = [];
   let title = '';
   let backHref = '#/';
+  let practiceLimit = null;
   if (isReview) {
     const missedMap = load().missed;
     const missed = Object.keys(missedMap).filter((qid) => !topic || missedMap[qid].topic === topic);
@@ -41,7 +42,8 @@ export function quizPage(root, { blockId, mode, topic }) {
   } else if (block) {
     const content = getBlockContent(isDemo ? 'demo' : block.id);
     questions = mode === 'checkpoint' ? content.checkpoint : content.practice;
-    title = mode === 'checkpoint' ? (block.checkpoint?.label || 'Checkpoint') : `Block ${block.id} practice`;
+    practiceLimit = mode === 'practice' && !isDemo ? content.practiceTimeLimitSec || null : null;
+    title = mode === 'checkpoint' ? (block.checkpoint?.label || 'Checkpoint') : (content.practiceLabel ? content.practiceLabel.replace(/ \(.*\)$/, '') : `Block ${block.id} practice`);
     if (isDemo) title = mode === 'checkpoint' ? 'Demo checkpoint' : 'Demo practice';
     backHref = isDemo ? '#/settings' : `#/block/${block.id}`;
     if (!isDemo) visitBlock(block.id);
@@ -73,14 +75,14 @@ export function quizPage(root, { blockId, mode, topic }) {
   root.innerHTML = `
     <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Dashboard</a> › ${block ? `<a href="${backHref}">${isDemo ? 'Backup' : `Block ${block.id}`}</a>` : `<a href="#/review">Review</a>`} › ${isCheckpoint ? 'Checkpoint' : 'Practice'}</nav>
     <h1>${title}</h1>
-    ${isCheckpoint ? `<p class="muted">${block.checkpoint.description}. Target ${block.checkpoint.target} of ${questions.length}. ${Math.round(block.checkpoint.timeLimitSec / 60)} minutes. No feedback until the end.</p>` : `<p class="muted">Feedback and a worked solution after each answer.</p>`}
+    ${isCheckpoint ? `<p class="muted">${block.checkpoint.description}. Target ${block.checkpoint.target} of ${questions.length}. ${Math.round(block.checkpoint.timeLimitSec / 60)} minutes. No feedback until the end.</p>` : `<p class="muted">Feedback and a worked solution after each answer.${practiceLimit ? ` ${Math.round(practiceLimit / 60)}-minute countdown; the set ends when it reaches zero.` : ''}</p>`}
     <div id="quiz-root"></div>`;
 
   active = mountQuiz(root.querySelector('#quiz-root'), {
     questions,
     mode,
     title,
-    timeLimitSec: isCheckpoint ? block.checkpoint.timeLimitSec : null,
+    timeLimitSec: isCheckpoint ? block.checkpoint.timeLimitSec : practiceLimit,
     target: isCheckpoint ? block.checkpoint.target : null,
     persist: !isDemo,
     backHref,

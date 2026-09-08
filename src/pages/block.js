@@ -28,14 +28,14 @@ export function blockPage(root, { id }) {
     </section>
 
     <section class="card" aria-labelledby="lesson-h">
-      <h2 id="lesson-h">Lesson</h2>
+      <h2 id="lesson-h">${content.lessonTitle || 'Lesson'}</h2>
       ${content.lesson ?? placeholder('Lesson', b)}
     </section>
 
     <section class="card" aria-labelledby="practice-h">
-      <h2 id="practice-h">Practice set</h2>
+      <h2 id="practice-h">${content.practiceLabel || 'Practice set'}</h2>
       ${content.practice.length
-        ? `<p>${content.practice.length} questions. Instant feedback, solution after each answer.</p>
+        ? `<p>${content.practice.length} questions. ${content.practiceTimeLimitSec ? `${Math.round(content.practiceTimeLimitSec / 60)}-minute countdown. ` : ''}Instant feedback, solution after each answer.</p>
            <a class="btn" href="#/quiz/${b.id}/practice">Start practice</a>`
         : placeholder('Practice set', b)}
       <p class="small muted">Answered so far: ${p.practiceAnswered} · correct: ${p.practiceCorrect}</p>
@@ -44,7 +44,7 @@ export function blockPage(root, { id }) {
     ${b.checkpoint ? `
     <section class="card card-accent" aria-labelledby="cp-h">
       <h2 id="cp-h">${b.checkpoint.label}</h2>
-      <p>${b.checkpoint.description}. Target: ${b.checkpoint.target} of ${b.checkpoint.questions}. Time limit: ${Math.round(b.checkpoint.timeLimitSec / 60)} minutes.</p>
+      <p>${b.checkpoint.description}. ${content.checkpointNote ? content.checkpointNote + ' ' : ''}Target: ${b.checkpoint.target} of ${b.checkpoint.questions}. Time limit: ${Math.round(b.checkpoint.timeLimitSec / 60)} minutes.</p>
       ${content.checkpoint.length
         ? `<a class="btn" href="#/quiz/${b.id}/checkpoint">Start checkpoint</a>`
         : `<p class="muted small">Checkpoint questions arrive with the block content.</p>`}

@@ -34,7 +34,7 @@ Push to `main` from any machine deploys the site. Pull before starting a session
 node scripts-validate.mjs
 ```
 
-Structural checks on every registered block: ids, choices, answer indexes, difficulty ramp, KaTeX parses, rounded answers carry a `tolerance`.
+Structural checks on all 8 blocks: ids, choices, answer indexes, difficulty ramp, KaTeX parses, rounded answers carry a `tolerance`.
 
 ## Deploy
 
@@ -47,4 +47,4 @@ Pushing to `main` builds and deploys to GitHub Pages via `.github/workflows/depl
 3. Blocks 1-2 content: done (independently re-solved, 50/50 keys verified)
 4. Blocks 3-5 content: done (awaiting independent re-solve QC)
 5. Blocks 6-7 content + review page: done (Block 6 coordinate geometry, Block 7 solid geometry, no checkpoints per the plan; Review page gained a topic health table, per-topic retry, miss history)
-6. Block 8, dashboard polish, mobile pass, final deploy: pending
+6. Block 8, dashboard polish, mobile pass, final deploy: done (Block 8 = game plan + one-page recap + Mixed Set A timed practice + Checkpoint 4 as Mixed Set B; dashboard shows per-block progress bars, overall totals, and a Review nudge; mobile pass at 375px)

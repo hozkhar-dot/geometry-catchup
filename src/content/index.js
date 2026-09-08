@@ -15,6 +15,7 @@ import block4 from './block4.js';
 import block5 from './block5.js';
 import block6 from './block6.js';
 import block7 from './block7.js';
+import block8 from './block8.js';
 
 const REGISTRY = {
   1: normalize(block1),
@@ -24,7 +25,7 @@ const REGISTRY = {
   5: normalize(block5),
   6: normalize(block6),
   7: normalize(block7),
-  // 8 added in session 6
+  8: normalize(block8),
 };
 
 const EMPTY = { lesson: null, practice: [], checkpoint: [] };
